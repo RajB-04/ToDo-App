@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Task</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #282e33;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            margin: 20px auto;
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        div a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        div a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Update Task</h2>
+    <form th:action="@{/tasks/update/{taskid}(taskid=${task.taskid})}" method="post">
+        <input type="hidden" th:value="${task.taskid}" name="taskid"/>
+        
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" th:value="${task.taskName}" required>
+        
+        <label for="taskStatus">Status:</label>
+        <select id="taskStatus" name="taskStatus">
+            <option th:selected="${!task.taskStatus}" value="false">Pending</option>
+            <option th:selected="${task.taskStatus}" value="true">Completed</option>
+        </select>
+
+        <input type="submit" value="Update Task">
+    </form>
+    <div>
+        <a href="/tasks/">Back to Task List</a>
+    </div>
+</body>
+</html>
